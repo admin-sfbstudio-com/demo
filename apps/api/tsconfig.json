@@ -1,0 +1,12 @@
+{
+  "extends": "@demo/tsconfig/node.json",
+  "compilerOptions": {
+    "paths": {
+      "~/*": ["./src/*"]
+    },
+    "rootDir": ".",
+    "typeRoots": ["node_modules/@types", "src/lib/types"]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}

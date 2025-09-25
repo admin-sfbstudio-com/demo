@@ -1,0 +1,22 @@
+# Build outputs
+dist
+out
+stats
+
+# Deps
+node_modules
+
+# Env files
+.env
+.env.*
+
+# Logs
+*.log
+
+# Misc
+.DS_Store
+.vim
+.nvim.lua
+
+# Turbo
+.turbo

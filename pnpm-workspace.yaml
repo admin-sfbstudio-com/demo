@@ -1,0 +1,12 @@
+packages:
+  - apps/*
+  - packages/*
+
+publicHoistPattern:
+  - '@biomejs/biome'
+  - '@types*'
+  - prettier
+  - typescript
+
+onlyBuiltDependencies:
+  - esbuild

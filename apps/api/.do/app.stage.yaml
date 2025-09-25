@@ -1,0 +1,58 @@
+name: demo-api-stage
+region: nyc
+
+databases:
+  - name: demo-stage-db
+    cluster_name: demo-stage-db
+
+services:
+  - name: api
+    dockerfile_path: apps/api/Dockerfile
+    source_dir: /
+    github:
+      repo: npearson72/demo
+      branch: dev
+      deploy_on_push: false # Manual trigger only
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    http_port: 3000
+    health_check:
+      http_path: /status
+      timeout_seconds: 10
+      port: 3000
+    envs:
+      - key: APP_REGION
+        value: NYC
+      - key: DATABASE_URL
+        value: ${demo-stage-db.DATABASE_URL}
+      - key: DATABASE_CA_CERT
+        value: ${demo-stage-db.CA_CERT}
+      - key: LOG_LEVEL
+        value: debug
+      - key: NODE_ENV
+        value: stage
+      - key: PGSSLMODE
+        value: require
+      - key: PORT
+        value: '3000'
+    run_command: bun run src/index.ts
+
+jobs:
+  - name: migrate
+    kind: PRE_DEPLOY
+    dockerfile_path: apps/api/Dockerfile
+    source_dir: /
+    github:
+      repo: npearson72/demo
+      branch: dev
+    instance_size_slug: basic-xxs
+    envs:
+      - key: DATABASE_CA_CERT
+        value: ${demo-stage-db.CA_CERT}
+      - key: DATABASE_URL
+        value: ${demo-stage-db.DATABASE_URL}
+      - key: NODE_ENV
+        value: stage
+      - key: PGSSLMODE
+        value: require
+    run_command: sh -c "cd /demo && pnpm --filter @demo/api db:migrate"

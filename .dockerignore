@@ -1,0 +1,11 @@
+**/.DS_Store
+**/.env
+**/.git
+**/.gitignore
+
+**/*.log*
+**/*.md
+**/Dockerfile
+
+**/.turbo/
+**/node_modules/

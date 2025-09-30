@@ -16,11 +16,15 @@ const url = AppSettings.get('DATABASE_URL')!;
 
 const config: Config = {
   dbCredentials: {
-    url,
-    ssl: {
+    host: AppSettings.get('DATABASE_HOST')!,
+    port: Number(AppSettings.get('DATABASE_PORT')!),
+    user: AppSettings.get('DATABASE_USER')!,
+    password: AppSettings.get('DATABASE_PASSWORD')!,
+    database: AppSettings.get('DATABASE_NAME')!,
+    ssl: { 
       rejectUnauthorized: true,
-      ca: AppSettings.get('DATABASE_CA_CERT')
-    }
+      ca: fs.readFileSync('/tmp/ca.crt', 'utf-8'), 
+    },
   },
   dialect: 'postgresql',
   migrations: {

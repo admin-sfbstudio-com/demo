@@ -22,8 +22,8 @@ const config: Config = {
     password: AppSettings.get('DATABASE_PASSWORD')!,
     database: AppSettings.get('DATABASE_NAME')!,
     ssl: { 
-      rejectUnauthorized: true,
-      ca: fs.readFileSync('/tmp/ca.crt', 'utf-8'), 
+      rejectUnauthorized: false,
+      ca: AppSettings.get('DATABASE_CA_CERT')!, 
     },
   },
   dialect: 'postgresql',

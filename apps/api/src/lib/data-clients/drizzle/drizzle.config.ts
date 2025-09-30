@@ -17,12 +17,10 @@ const url = AppSettings.get('DATABASE_URL')!;
 const config: Config = {
   dbCredentials: {
     url,
-    ...(!AppSettings.isDev() && {
-      ssl: {
-        rejectUnauthorized: true,
-        ca: AppSettings.get('DATABASE_CA_CERT')
-      }
-    })
+    ssl: {
+      rejectUnauthorized: true,
+      ca: AppSettings.get('DATABASE_CA_CERT')
+    }
   },
   dialect: 'postgresql',
   migrations: {

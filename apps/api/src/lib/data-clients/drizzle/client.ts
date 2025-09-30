@@ -12,12 +12,10 @@ const config: PoolConfig = {
 };
 
 // Enable SSL verification with DigitalOcean CA certificate
-if (!AppSettings.isDev()) {
-  config.ssl = {
-    rejectUnauthorized: true,
-    ca: AppSettings.get('DATABASE_CA_CERT')
-  };
-}
+config.ssl = {
+  rejectUnauthorized: true,
+  ca: AppSettings.get('DATABASE_CA_CERT')
+};
 
 const pool = new Pool({
   ...config,

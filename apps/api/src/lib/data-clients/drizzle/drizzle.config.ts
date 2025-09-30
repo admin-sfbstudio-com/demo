@@ -22,7 +22,7 @@ const config: Config = {
     password: AppSettings.get('DATABASE_PASSWORD')!,
     database: AppSettings.get('DATABASE_NAME')!,
     ssl: { 
-      rejectUnauthorized: false,
+      rejectUnauthorized: true,
       ca: AppSettings.get('DATABASE_CA_CERT')!, 
     },
   },

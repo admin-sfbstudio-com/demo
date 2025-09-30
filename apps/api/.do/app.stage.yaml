@@ -10,7 +10,7 @@ services:
     dockerfile_path: apps/api/Dockerfile
     source_dir: /
     github:
-      repo: npearson72/demo
+      repo: admin-sfbstudio-com/demo
       branch: dev
       deploy_on_push: false # Manual trigger only
     instance_count: 1
@@ -43,7 +43,7 @@ jobs:
     dockerfile_path: apps/api/Dockerfile
     source_dir: /
     github:
-      repo: npearson72/demo
+      repo: admin-sfbstudio-com/demo
       branch: dev
     instance_size_slug: basic-xxs
     envs:
@@ -63,7 +63,5 @@ jobs:
         value: ${demo-stage-db.DATABASE_URL}
       - key: NODE_ENV
         value: stage
-      - key: PGSSLMODE
-        value: require
-    run_command: sh -c "printf '%b\n' \"$DATABASE_CA_CERT\" > /tmp/ca.crt && cd /demo && pnpm --filter @demo/api db:migrate"
+    run_command: sh -c "cd /demo && pnpm --filter @demo/api db:migrate"
 

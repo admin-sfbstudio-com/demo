@@ -22,6 +22,11 @@ if (fs.existsSync(envFilePath('.env'))) {
 const EnvVars = [
   'APP_REGION',
   'DATABASE_CA_CERT',
+  'DATABASE_HOST',
+  'DATABASE_PORT',
+  'DATABASE_USER',
+  'DATABASE_PASSWORD',
+  'DATABASE_NAME',
   'DATABASE_URL',
   'ENVIRONMENT',
   'LOG_LEVEL',

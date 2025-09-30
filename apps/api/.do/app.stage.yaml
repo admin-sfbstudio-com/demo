@@ -49,10 +49,21 @@ jobs:
     envs:
       - key: DATABASE_CA_CERT
         value: ${demo-stage-db.CA_CERT}
+      - key: DATABASE_HOST
+        value: ${demo-stage-db.HOSTNAME}
+      - key: DATABASE_PORT
+        value: ${demo-stage-db.PORT}
+      - key: DATABASE_NAME
+        value: ${demo-stage-db.DATABASE}
+      - key: DATABASE_USER
+        value: ${demo-stage-db.USERNAME}
+      - key: DATABASE_PASSWORD
+        value: ${demo-stage-db.PASSWORD}
       - key: DATABASE_URL
         value: ${demo-stage-db.DATABASE_URL}
       - key: NODE_ENV
         value: stage
       - key: PGSSLMODE
         value: require
-    run_command: sh -c "cd /demo && pnpm --filter @demo/api db:migrate"
+    run_command: sh -c "printf '%b\n' \"$DATABASE_CA_CERT\" > /tmp/ca.crt && cd /demo && pnpm --filter @demo/api db:migrate"
+
